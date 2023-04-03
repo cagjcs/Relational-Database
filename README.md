@@ -1,2 +1,1 @@
-# Relational-Database
-Relational Database - exercises
+# Celestial Bodies Database
