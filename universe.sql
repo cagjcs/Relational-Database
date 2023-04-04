@@ -1,23 +1,4 @@
 --
--- PostgreSQL database dump
---
-
--- Dumped from database version 12.9 (Ubuntu 12.9-2.pgdg20.04+1)
--- Dumped by pg_dump version 12.9 (Ubuntu 12.9-2.pgdg20.04+1)
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET xmloption = content;
-SET client_min_messages = warning;
-SET row_security = off;
-
-DROP DATABASE universe;
---
 -- Name: universe; Type: DATABASE; Schema: -; Owner: freecodecamp
 --
 
@@ -301,6 +282,22 @@ INSERT INTO public.moon VALUES (6, 'Gaminides', 'Ganimedes (del griego Γανυ�
 INSERT INTO public.moon VALUES (7, 'Calisto', 'Es el tercer satélite más grande del sistema solar y el segundo del sistema joviano', 5, 4820.60, 5);
 INSERT INTO public.moon VALUES (8, 'Titan', 'Titán es el mayor de los satélites de Saturno y el segundo del sistema solar tras Ganimedes', 6, 5150.00, 10);
 INSERT INTO public.moon VALUES (9, 'Dione', 'Dione es un satélite natural de Saturno descubierto en 1684 por Giovanni Cassini', 6, 1128.80, 11);
+INSERT INTO public.moon VALUES (10, 'Cordelia', 'Cordelia es el más cercano satélite natural de Urano', 7, 40.20, 7);
+INSERT INTO public.moon VALUES (11, 'Ofelia', 'Ofelia es un satélite natural de Urano', 7, 42.80, 7);
+INSERT INTO public.moon VALUES (12, 'Bianca', '', 7, 51.40, 7);
+INSERT INTO public.moon VALUES (13, 'Crésida', '', 7, 79.60, 7);
+INSERT INTO public.moon VALUES (14, 'Desdémona', '', 7, 64.00, 8);
+INSERT INTO public.moon VALUES (15, 'Julieta', '', 7, 93.60, 8);
+INSERT INTO public.moon VALUES (16, 'Porcia', '', 7, 136.00, 8);
+INSERT INTO public.moon VALUES (17, 'Rosalinda', '', 7, 72.00, 8);
+INSERT INTO public.moon VALUES (18, 'Cupido', '', 7, 12.00, 8);
+INSERT INTO public.moon VALUES (19, 'Belinda', '', 7, 80.60, 7);
+INSERT INTO public.moon VALUES (20, 'Perdita', '', 7, 80.00, 7);
+INSERT INTO public.moon VALUES (21, 'Puck', '', 7, 162.00, 7);
+INSERT INTO public.moon VALUES (22, 'Proteo', 'Proteo es el segundo satélite más grande de Neptuno', 8, 418.00, 8);
+INSERT INTO public.moon VALUES (23, 'Tritón', 'Tritón es un satélite de Neptuno que se encuentra a 4500 millones de kilómetros del Sol', 8, 2707.00, 8);
+INSERT INTO public.moon VALUES (24, 'Nereida', 'satélite natural de Neptuno, el tercero en tamaño', 8, 340.00, 8);
+INSERT INTO public.moon VALUES (25, 'Halimede', 'satélite irregular con movimiento retrógrado de Neptuno', 8, 48.00, 8);
 
 
 --
@@ -315,6 +312,11 @@ INSERT INTO public.planet VALUES (5, 'Jupiter', 'Júpiter es el planeta más gra
 INSERT INTO public.planet VALUES (6, 'Saturno', 'Saturno es el sexto planeta del sistema solar contando desde el Sol, el segundo en tamaño y masa', 1, true, 83, false, 73);
 INSERT INTO public.planet VALUES (7, 'Urano', 'Urano es el séptimo planeta del sistema solar, el tercero de mayor tamaño, y el cuarto más masivo', 1, true, 5, false, 88);
 INSERT INTO public.planet VALUES (8, 'Neptuno', 'Neptuno es el octavo planeta en distancia respecto al Sol y el más lejano del sistema solar', 1, true, 1, false, 38);
+INSERT INTO public.planet VALUES (10, 'Ceres', 'Ceres es un planeta enano y el objeto astronómico más grande del cinturón de asteroides', 1, false, 0, false, 1);
+INSERT INTO public.planet VALUES (11, 'Plutón', 'Plutón, designado (134340) Pluto, es un planeta enano del sistema solar situado a continuación de la órbita de Neptuno', 1, true, 4, false, 2);
+INSERT INTO public.planet VALUES (12, 'Haumea', 'planeta enano que se encuentra más allá de la órbita de Neptuno, en el cinturón de Kuiper', 1, true, 2, false, 3);
+INSERT INTO public.planet VALUES (13, 'Makemake', 'planeta enano ubicado en el cinturón de Kuiper', 1, true, 1, false, 4);
+INSERT INTO public.planet VALUES (14, 'Eris', 'Es el objeto transneptuniano más masivo, el segundo más grande después de Plutón', 1, true, 1, false, 5);
 
 
 --
@@ -347,14 +349,14 @@ SELECT pg_catalog.setval('public.galaxy_galaxy_id_seq', 6, true);
 -- Name: moon_moon_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.moon_moon_id_seq', 9, true);
+SELECT pg_catalog.setval('public.moon_moon_id_seq', 25, true);
 
 
 --
 -- Name: planet_planet_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.planet_planet_id_seq', 8, true);
+SELECT pg_catalog.setval('public.planet_planet_id_seq', 14, true);
 
 
 --
@@ -362,6 +364,14 @@ SELECT pg_catalog.setval('public.planet_planet_id_seq', 8, true);
 --
 
 SELECT pg_catalog.setval('public.star_star_id_seq', 6, true);
+
+
+--
+-- Name: galaxy_form galaxy_form_name_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.galaxy_form
+    ADD CONSTRAINT galaxy_form_name_key UNIQUE (name);
 
 
 --
@@ -373,11 +383,27 @@ ALTER TABLE ONLY public.galaxy_form
 
 
 --
+-- Name: galaxy galaxy_name_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.galaxy
+    ADD CONSTRAINT galaxy_name_key UNIQUE (name);
+
+
+--
 -- Name: galaxy galaxy_pkey; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
 ALTER TABLE ONLY public.galaxy
     ADD CONSTRAINT galaxy_pkey PRIMARY KEY (galaxy_id);
+
+
+--
+-- Name: moon moon_name_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.moon
+    ADD CONSTRAINT moon_name_key UNIQUE (name);
 
 
 --
@@ -389,11 +415,27 @@ ALTER TABLE ONLY public.moon
 
 
 --
+-- Name: planet planet_name_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.planet
+    ADD CONSTRAINT planet_name_key UNIQUE (name);
+
+
+--
 -- Name: planet planet_pkey; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
 ALTER TABLE ONLY public.planet
     ADD CONSTRAINT planet_pkey PRIMARY KEY (planet_id);
+
+
+--
+-- Name: star star_name_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.star
+    ADD CONSTRAINT star_name_key UNIQUE (name);
 
 
 --
